@@ -14,9 +14,12 @@
     "fix:prettier": "prettier --write ."
   },
   "dependencies": {
+    "autoprefixer": "^10.3.5",
     "next": "11.1.2",
+    "postcss": "^8.3.8",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "tailwindcss": "^2.2.15"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
