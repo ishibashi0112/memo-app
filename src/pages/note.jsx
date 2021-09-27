@@ -3,8 +3,9 @@ import Head from "next/head";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Lists from "../components/Lists";
+import Form from "../components/Form";
 
-export default function Index() {
+export default function Note() {
   return (
     <div>
       <Head>
@@ -16,9 +17,7 @@ export default function Index() {
         <Header />
         <div className="flex flex-1 ">
           <Lists />
-          <div className="w-2/3">
-            <h1>メモを選択してください</h1>
-          </div>
+          <Form />
         </div>
         <Footer />
       </div>
