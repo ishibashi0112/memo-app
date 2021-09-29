@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import useSWR from "swr";
 
 export default function Form() {
   const [text, setText] = useState("");
+  const { data, mutate } = useSWR("foo", { fallbackData: [] });
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     setText(e.target.value);
-    console.log(text);
-  };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      console.log(text);
+      mutate([...data, text]);
+    };
+  }, []);
 
   return (
     <div className="w-2/3">

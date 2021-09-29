@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useSWR from "swr";
 
 export default function Lists() {
   const [memos] = useState([
@@ -6,6 +7,9 @@ export default function Lists() {
     { id: 2, body: "bbbbbbbb" },
     { id: 3, body: "cccccccc" },
   ]);
+
+  const { data } = useSWR("foo", { fallbackData: [] });
+  console.log(data);
 
   return (
     <div className="w-1/3">
