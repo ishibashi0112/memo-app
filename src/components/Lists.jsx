@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 
 export default function Lists() {
@@ -8,8 +8,13 @@ export default function Lists() {
     { id: 3, body: "cccccccc" },
   ]);
 
-  const { data } = useSWR("foo", { fallbackData: [] });
+  const { data } = useSWR("foo", { fallbackData: "" });
   console.log(data);
+
+  useEffect(() => {
+    const array = [...data, data];
+    console.log(array);
+  }, []);
 
   return (
     <div className="w-1/3">
