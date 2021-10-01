@@ -1,28 +1,33 @@
-import React, { useCallback, useEffect, useState } from "react";
-import useSWR from "swr";
+import React, { useCallback, useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 export default function Form() {
-  // const [text, setText] = useState("");
-  // const { data, mutate } = useSWR("foo", { fallbackData: [] });
-  const { data, mutate } = useSWR("foo", { fallbackData: "" });
+  const [text, setText] = useState("");
+
   const handleChange = useCallback((e) => {
-    mutate(e.target.value);
+    setText(e.target.value);
   }, []);
 
-  // useEffect(() => {
-  //   return () => {
-  //     console.log(text);
-  //     mutate([...data, text]);
-  //   };
-  // }, []);
+  const handleSubmit = useCallback(() => {
+    console.log(text);
+  }, [text]);
 
   return (
     <div className="w-2/3">
-      <input
+      <button
+        className={
+          "block border max-w-sm p-2 rounded-xl m-auto my-6 hover:text-blue-500 "
+        }
+        onClick={handleSubmit}
+      >
+        保存
+      </button>
+      <textarea
         type="text"
-        value={data}
+        value={text}
         onChange={handleChange}
-        className="w-2/3 h-3/6 border-2"
+        className="w-full h-4/5 border-2 rounded-xl"
       />
     </div>
   );

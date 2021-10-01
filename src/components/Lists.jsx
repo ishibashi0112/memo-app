@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from "react";
-import useSWR from "swr";
+import React, { useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
+
+const docRef = doc(db, "memos", "wbNFalylJgGO3LqFBo2G");
+console.log(docRef);
 
 export default function Lists() {
   const [memos] = useState([
@@ -7,14 +11,6 @@ export default function Lists() {
     { id: 2, body: "bbbbbbbb" },
     { id: 3, body: "cccccccc" },
   ]);
-
-  const { data } = useSWR("foo", { fallbackData: "" });
-  console.log(data);
-
-  useEffect(() => {
-    const array = [...data, data];
-    console.log(array);
-  }, []);
 
   return (
     <div className="w-1/3">
