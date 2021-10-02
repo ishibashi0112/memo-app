@@ -10,7 +10,12 @@ export default function Form() {
   }, []);
 
   const handleSubmit = useCallback(() => {
-    console.log(text);
+    async () => {
+      const docRef = await addDoc(collection(db, "memos"), {
+        body: "rrrrrr",
+      });
+      console.log(docRef);
+    };
   }, [text]);
 
   return (
