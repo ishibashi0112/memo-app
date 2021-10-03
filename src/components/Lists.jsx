@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
 export default function Lists() {
@@ -17,8 +17,9 @@ export default function Lists() {
   };
 
   useEffect(() => {
+    console.log("foo");
     getAllMemos();
-  }, [memos]);
+  }, []);
 
   return (
     <div className="w-1/3">
@@ -26,7 +27,7 @@ export default function Lists() {
       <ul>
         {memos.map((memo) => {
           return (
-            <li key={memo.id} className="w-full h-16">
+            <li key={memo.id} className="w-full h-16 mt-3">
               <h2>{memo.body}</h2>
               <h2>{memo.datetime.seconds}</h2>
             </li>

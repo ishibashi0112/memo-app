@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
 
 export default function Form() {
@@ -9,14 +9,13 @@ export default function Form() {
     setText(e.target.value);
   }, []);
 
-  const handleSubmit = useCallback(() => {
-    async () => {
-      const docRef = await addDoc(collection(db, "memos"), {
-        body: "rrrrrr",
-      });
-      console.log(docRef);
-    };
-  }, [text]);
+  const handleSubmit = async () => {
+    const datetime = Timestamp.fromDate(new Date());
+    await addDoc(collection(db, "memos"), {
+      body: text,
+      datetime,
+    });
+  };
 
   return (
     <div className="w-2/3">
