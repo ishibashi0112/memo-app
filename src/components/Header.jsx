@@ -8,7 +8,7 @@ export default function Header() {
         <Link href="/">
           <a className="font-bold text-4xl">MeMoApp</a>
         </Link>
-        <Link href="/note">
+        <Link href="/notes">
           <a>新規作成</a>
         </Link>
         <h2>user-icon</h2>

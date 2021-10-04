@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
@@ -27,9 +28,13 @@ export default function Lists() {
       <ul>
         {memos.map((memo) => {
           return (
-            <li key={memo.id} className="w-full h-16 mt-3">
-              <h2>{memo.body}</h2>
-              <h2>{memo.datetime.seconds}</h2>
+            <li key={memo.id} className="w-full h-16 mt-3g">
+              <Link href={`/list/${memo.id}`}>
+                <a className="hover:text-blue-500">
+                  <h2>{memo.body}</h2>
+                  <h2>{memo.datetime.seconds}</h2>
+                </a>
+              </Link>
             </li>
           );
         })}
