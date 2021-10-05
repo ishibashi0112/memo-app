@@ -18,7 +18,6 @@ export default function Lists() {
   };
 
   useEffect(() => {
-    console.log("foo");
     getAllMemos();
   }, []);
 
