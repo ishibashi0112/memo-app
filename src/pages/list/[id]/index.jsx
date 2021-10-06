@@ -1,31 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import Lists from "../../../components/Lists";
-import Form from "../../../components/Form";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from "../../../firebase";
 
 const list = () => {
+  const [text, setText] = useState("");
+  const [memo, setMemo] = useState("");
   const router = useRouter();
+  const memoId = router.query.id;
 
   const getMemo = async () => {
-    if (!router.query.id === undefined) {
-      const res = doc(db, "memos", router.query.id);
+    if (memoId) {
+      const res = doc(db, "memos", memoId);
       const data = await getDoc(res);
-      const memo = data.data();
-      console.log(3);
-      return memo;
+      const memoData = data.data();
+      setMemo(memoData);
     }
-    const memo = null;
-    return memo;
   };
+
+  const handleClickUpdate = async () => {
+    const datetime = Timestamp.fromDate(new Date());
+    const memoRef = doc(db, "memos", memoId);
+    await setDoc(memoRef, {
+      body: text,
+      datetime,
+    });
+  };
+
+  const handleChange = useCallback((e) => {
+    setText(e.target.value);
+  }, []);
 
   useEffect(() => {
     getMemo();
-  });
+  }, [memoId]);
 
   return (
     <div>
@@ -37,7 +49,22 @@ const list = () => {
 
         <div className="flex flex-1 ">
           <Lists />
-          <Form />
+          <div className="w-2/3">
+            <button
+              className={
+                "block border max-w-sm p-2 rounded-xl m-auto my-6 hover:text-blue-500 "
+              }
+              onClick={handleClickUpdate}
+            >
+              上書き
+            </button>
+            <textarea
+              type="text"
+              value={text}
+              className="w-full h-4/5 border-2 rounded-xl"
+              onChange={handleChange}
+            />
+          </div>
         </div>
         <Footer />
       </div>
