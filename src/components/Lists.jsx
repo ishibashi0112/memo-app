@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase";
 
 export default function Lists() {
   const [memos, setMemos] = useState([]);
 
   const getAllMemos = async () => {
-    const res = await getDocs(collection(db, "memos"));
+    const q = query(collection(db, "memos"), orderBy("datetime", "desc"));
+    const res = await getDocs(q);
     const resArray = res.docs;
     const Allmemos = resArray.map((doc) => ({
       id: doc.id,
