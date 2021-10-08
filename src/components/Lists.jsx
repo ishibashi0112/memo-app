@@ -28,7 +28,7 @@ export default function Lists() {
       <ul>
         {memos.map((memo) => {
           return (
-            <li key={memo.id} className="w-full h-16 mt-3g">
+            <li key={memo.id} className="w-full h-16 mt-3g truncate">
               <Link href={`/list/${memo.id}`}>
                 <a className="hover:text-blue-500">
                   <h2>{memo.body}</h2>
