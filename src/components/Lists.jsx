@@ -23,12 +23,12 @@ export default function Lists() {
   }, []);
 
   return (
-    <div className="w-1/3">
+    <div className="w-1/3 border rounded-xl m-2.5">
       <h1>メモ一覧</h1>
       <ul>
         {memos.map((memo) => {
           return (
-            <li key={memo.id} className="w-full h-16 mt-3g truncate">
+            <li key={memo.id} className="w-full h-16 mt-3g border-b truncate">
               <Link href={`/list/${memo.id}`}>
                 <a className="hover:text-blue-500">
                   <h2>{memo.body}</h2>

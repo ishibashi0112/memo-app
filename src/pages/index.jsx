@@ -16,7 +16,7 @@ export default function Index() {
         <Header />
         <div className="flex flex-1 ">
           <Lists />
-          <div className="w-2/3">
+          <div className="w-2/3 border rounded-xl m-2.5">
             <h1>メモを選択してください</h1>
           </div>
         </div>

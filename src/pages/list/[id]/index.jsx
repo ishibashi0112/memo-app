@@ -53,9 +53,9 @@ const list = () => {
       <div className="min-h-screen w-full flex flex-col">
         <Header />
 
-        <div className="flex flex-1 ">
+        <div className="flex flex-1  ">
           <Lists />
-          <div className="w-2/3">
+          <div className="w-2/3 border rounded-xl m-2.5">
             <button
               className={
                 "border max-w-sm p-2 rounded-xl m-auto my-6 hover:text-blue-500 "
@@ -75,7 +75,7 @@ const list = () => {
             <textarea
               type="text"
               value={text}
-              className="w-full h-4/5 border-2 rounded-xl"
+              className="w-3/4 h-4/5 border-2 rounded-xl"
               onChange={handleChange}
             />
           </div>
