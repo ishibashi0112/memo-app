@@ -21,7 +21,7 @@ export default function Form() {
     <div className="w-2/3 border rounded-xl m-2.5">
       <button
         className={
-          "block border max-w-sm p-2 rounded-xl m-auto my-6 hover:text-blue-500 "
+          "block border font-bold px-6 py-2 rounded-xl m-auto my-6 hover:text-blue-500 "
         }
         onClick={handleSubmit}
       >
@@ -31,7 +31,7 @@ export default function Form() {
         type="text"
         value={text}
         onChange={handleChange}
-        className="w-3/4 h-4/5 border-2 rounded-xl"
+        className="block w-3/4 h-4/5 border-2 rounded-xl mx-auto"
       />
     </div>
   );

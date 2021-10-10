@@ -24,7 +24,7 @@ export default function Lists() {
 
   return (
     <div className="w-1/3 border rounded-xl m-2.5">
-      <h1>メモ一覧</h1>
+      <h1 className="block border-b text-center rounded-t-xl bg-gray-200">{`メモ一覧 ${memos.length}件`}</h1>
       <ul>
         {memos.map((memo) => {
           return (
