@@ -5,7 +5,7 @@ import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import Lists from "../../../components/Lists";
 import { doc, getDoc, setDoc, Timestamp, deleteDoc } from "firebase/firestore";
-import { db } from "../../../firebase";
+import { db } from "../../../firebase/firebase";
 
 const list = () => {
   const [text, setText] = useState("");

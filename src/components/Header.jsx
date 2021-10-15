@@ -1,22 +1,30 @@
 import React from "react";
 import Link from "next/link";
 
-import { auth } from "../firebase";
+import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
+import { useRouter } from "next/router";
 
 export default function Header() {
+  const router = useRouter();
   const handleClick = async () => {
     try {
       const user1 = await auth.currentUser;
       console.log(user1);
-      await signOut();
+      await signOut(auth);
       const user2 = await auth.currentUser;
       console.log(user2);
+      router.replace("/auth/signIn");
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
     }
+  };
+
+  const handleClickCheck = async () => {
+    const user = await auth.currentUser;
+    console.log(user);
   };
 
   return (
@@ -34,6 +42,9 @@ export default function Header() {
           <h2 className="block my-auto">user-icon</h2>
           <button type={"button"} onClick={handleClick}>
             ログアウト
+          </button>
+          <button type={"button"} onClick={handleClickCheck}>
+            チェック
           </button>
         </div>
       </header>

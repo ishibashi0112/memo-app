@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebase/firebase";
 
 export default function Form() {
   const [text, setText] = useState("");

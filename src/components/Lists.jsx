@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebase/firebase";
 
 export default function Lists() {
   const [memos, setMemos] = useState([]);

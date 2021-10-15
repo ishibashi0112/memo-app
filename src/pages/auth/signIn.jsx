@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useRouter } from "next/router";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { auth } from "../../firebase";
+import { auth } from "../../firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 function Copyright(props) {
@@ -37,6 +39,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const router = useRouter();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -46,6 +50,7 @@ export default function SignIn() {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
       console.log(user);
+      router.replace("/");
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -90,7 +95,7 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
+              // autoFocus
             />
             <TextField
               margin="normal"
