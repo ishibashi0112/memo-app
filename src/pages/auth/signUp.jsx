@@ -11,29 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { auth } from "../../firebase/firebase";
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-} from "firebase/auth";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { singUpAuth } from "../../firebase/auth";
 
 const theme = createTheme();
 
@@ -43,23 +21,7 @@ export default function SignUp() {
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
-
-    try {
-      const user = await createUserWithEmailAndPassword(auth, email, password);
-
-      await sendEmailVerification(auth.currentUser, null);
-
-      console.log(user);
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-    }
-
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    singUpAuth(email, password);
   };
 
   return (
@@ -119,14 +81,13 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/auth/signIn" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );

@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-
+import { auth } from "../firebase/firebase";
 export default function Form() {
   const [text, setText] = useState("");
 
@@ -14,6 +14,7 @@ export default function Form() {
     await addDoc(collection(db, "memos"), {
       body: text,
       datetime,
+      uid: auth.currentUser.uid,
     });
   };
 

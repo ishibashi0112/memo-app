@@ -23,7 +23,7 @@ export default function Header() {
   };
 
   const handleClickCheck = async () => {
-    const user = await auth.currentUser;
+    const user = await auth.currentUser.uid;
     console.log(user);
   };
 

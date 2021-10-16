@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useRouter } from "next/router";
-
+//Material UI import
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,53 +14,19 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-import { auth } from "../../firebase/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+//firebase Auth import
+import { signInAuth } from "../../firebase/auth";
 
 const theme = createTheme();
 
 export default function SignIn() {
   const router = useRouter();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
-
-    try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
-      console.log(user);
-      router.replace("/");
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-    }
-
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    await signInAuth(router, email, password);
   };
 
   return (
@@ -126,14 +92,13 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/auth/signUp" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
