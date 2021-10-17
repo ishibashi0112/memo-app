@@ -52,7 +52,6 @@ const list = () => {
       </Head>
       <div className="min-h-screen w-full flex flex-col">
         <Header />
-
         <div className="flex flex-1  ">
           <Lists />
           <div className="w-2/3 border rounded-xl m-2.5">
