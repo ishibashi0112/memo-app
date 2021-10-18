@@ -1,36 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { getAllMemos } from "../firebase/firestore";
+import { getAllMemos, snapShot } from "../firebase/firestore";
+import { async } from "@firebase/util";
 
 export default function Lists() {
   const [memos, setMemos] = useState([]);
 
-  useEffect(() => {
-    console.log(getAllMemos());
-    // setMemos(getAllMemos);
+  const a = async () => {
+    const b = await getAllMemos();
+    setMemos(b);
+  };
 
-    // console.log(getAllMemos());
-    // setMemos(getAllMemos());
-    //   async () => {
-    //     const memosRef = collection(db, "memos");
-    //     const userId = await auth.currentUser.uid;
-    //     const q = query(
-    //       memosRef,
-    //       where("uid", "==", userId),
-    //       orderBy("datetime", "desc")
-    //     );
-    //     onSnapshot(q, (querySnapshot) => {
-    //       const docs = querySnapshot.docs;
-    //       const Allmemos = docs.map((doc) => ({
-    //         id: doc.id,
-    //         body: doc.data().body,
-    //         datetime: doc.data().datetime,
-    //       }));
-    //       setMemos(Allmemos);
-    //     });
-    //   };
-    // }
+  // const b = async () => {
+  //   snapShot();
+  // };
+
+  useEffect(() => {
+    a();
   }, []);
 
   return (
