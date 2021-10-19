@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { getAllMemos, snapShot } from "../firebase/firestore";
-import { async } from "@firebase/util";
+import { getAllMemos, memoMaps, memosQuery } from "../firebase/firestore";
+import { onSnapshot } from "firebase/firestore";
 
 export default function Lists() {
   const [memos, setMemos] = useState([]);
 
-  const a = async () => {
-    const b = await getAllMemos();
-    setMemos(b);
+  const GetMemos = async () => {
+    const memosArray = await getAllMemos();
+    setMemos(memosArray);
   };
 
-  // const b = async () => {
-  //   snapShot();
-  // };
+  const snapShot = async () => {
+    try {
+      const res = await memosQuery();
+      onSnapshot(res, async (querySnapshot) => {
+        const resArray = querySnapshot.docs;
+        const AllMemos = await memoMaps(resArray);
+        setMemos(AllMemos);
+      });
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    }
+  };
 
   useEffect(() => {
-    a();
+    GetMemos();
+    snapShot();
   }, []);
 
   return (
