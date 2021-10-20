@@ -33,9 +33,9 @@ export default function Lists() {
   }, []);
 
   return (
-    <div className="h-1/2 w-1/3 border rounded-xl m-2.5">
-      <h1 className="h-6 block border-b text-center rounded-t-xl bg-gray-200">{`メモ一覧 ${memos.length}件`}</h1>
-      <ul className=" h-3/4 overflow-scroll">
+    <div className="h-full w-1/3 border rounded-xl m-2.5">
+      <h1 className="h-6 block  border-b text-center rounded-t-xl bg-gray-200">{`メモ一覧 ${memos.length}件`}</h1>
+      <ul className=" h-[calc(100%-1.5rem)] overflow-scroll">
         {memos.map((memo) => {
           return (
             <li key={memo.id} className="w-full mt-3g border-b truncate">
