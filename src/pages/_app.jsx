@@ -4,14 +4,15 @@ import "tailwindcss/tailwind.css";
 import { auth } from "../firebase/firebase";
 
 function MyApp({ Component, pageProps }) {
-  const user = auth.currentUser;
+  // const user = auth.currentUser;
   const router = useRouter();
 
   useEffect(() => {
-    console.log(user);
-    if (!user) {
-      router.replace("/auth/signIn");
-    }
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        router.replace("/auth/signIn");
+      }
+    });
   }, []);
 
   return <Component {...pageProps} />;

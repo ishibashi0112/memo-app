@@ -1,57 +1,41 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import {
-  collection,
-  addDoc,
-  Timestamp,
-  doc,
-  getDoc,
-  setDoc,
-  deleteDoc,
-} from "firebase/firestore";
-import { db } from "../firebase/firebase";
-import { auth } from "../firebase/firebase";
+  deleteMemo,
+  getMemo,
+  newMemo,
+  updateMemo,
+} from "../firebase/firestore";
 
 const Form = () => {
   const [text, setText] = useState("");
   const router = useRouter();
+  const memoId = router.query.id;
 
   const handleChange = useCallback((e) => {
     setText(e.target.value);
   }, []);
 
   const handleSubmit = async () => {
-    const datetime = Timestamp.fromDate(new Date());
-    await addDoc(collection(db, "memos"), {
-      body: text,
-      datetime,
-      uid: auth.currentUser.uid,
-    });
-  };
-
-  const getMemo = async () => {
-    if (memoId) {
-      const res = doc(db, "memos", memoId);
-      const data = await getDoc(res);
-      const memoData = data.data();
-      setMemo(memoData);
-      setText(memoData.body);
-    }
+    newMemo(text);
   };
 
   const handleClickUpdate = async () => {
-    const datetime = Timestamp.fromDate(new Date());
-    const memoRef = doc(db, "memos", memoId);
-    await setDoc(memoRef, {
-      body: text,
-      datetime,
-    });
+    updateMemo(text, memoId);
   };
 
   const handleClickDelete = async () => {
-    await deleteDoc(doc(db, "memos", memoId));
-    console.log("削除しました");
+    deleteMemo(memoId);
   };
+
+  const memoLoading = async () => {
+    const memoData = await getMemo(memoId);
+    setText(memoData?.body);
+  };
+
+  useEffect(() => {
+    memoLoading();
+  }, [memoId]);
 
   return (
     <div className="h-full w-2/3 border rounded-xl m-2.5">
