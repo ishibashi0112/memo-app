@@ -49,11 +49,13 @@ export const getAllMemos = async () => {
 
 export const newMemo = async (text) => {
   const datetime = Timestamp.fromDate(new Date());
-  await addDoc(collection(db, "memos"), {
+  const memoData = await addDoc(collection(db, "memos"), {
     body: text,
     datetime,
     uid: auth.currentUser.uid,
   });
+  const newMemoId = memoData.id;
+  return newMemoId;
 };
 
 export const deleteMemo = async (memoId) => {

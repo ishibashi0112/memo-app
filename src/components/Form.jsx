@@ -17,7 +17,8 @@ const Form = () => {
   }, []);
 
   const handleSubmit = async () => {
-    newMemo(text);
+    const newMemoId = await newMemo(text);
+    router.replace(`/list/${newMemoId}`);
   };
 
   const handleClickUpdate = async () => {
@@ -26,6 +27,7 @@ const Form = () => {
 
   const handleClickDelete = async () => {
     deleteMemo(memoId);
+    router.replace("/");
   };
 
   const memoLoading = async () => {

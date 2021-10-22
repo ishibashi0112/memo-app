@@ -1,7 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import Header from "../../../components/Header";
-import Footer from "../../../components/Footer";
 import Lists from "../../../components/Lists";
 import Form from "../../../components/Form";
 
@@ -17,7 +16,6 @@ const list = () => {
           <Lists />
           <Form />
         </div>
-        <Footer />
       </div>
     </div>
   );

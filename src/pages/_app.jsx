@@ -4,7 +4,6 @@ import "tailwindcss/tailwind.css";
 import { auth } from "../firebase/firebase";
 
 function MyApp({ Component, pageProps }) {
-  // const user = auth.currentUser;
   const router = useRouter();
 
   useEffect(() => {

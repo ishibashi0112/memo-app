@@ -1,7 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 import Lists from "../components/Lists";
 
 export default function Index() {
@@ -16,11 +15,10 @@ export default function Index() {
         <Header />
         <div className="flex h-5/6">
           <Lists />
-          <div className="h-full w-2/3 border rounded-xl m-2.5">
-            <h1>メモを選択してください</h1>
+          <div className="hidden  h-full w-2/3 border rounded-xl m-2.5 sm:block ">
+            <h1 className=" ">メモを選択してください</h1>
           </div>
         </div>
-        <Footer />
       </div>
     </div>
   );

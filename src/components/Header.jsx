@@ -22,10 +22,10 @@ export default function Header() {
     }
   };
 
-  const handleClickCheck = async () => {
-    const user = await auth.currentUser.uid;
-    console.log(user);
-  };
+  // const handleClickCheck = async () => {
+  //   const user = await auth.currentUser.uid;
+  //   console.log(user);
+  // };
 
   return (
     <div>
@@ -33,19 +33,22 @@ export default function Header() {
         <Link href="/">
           <a className="block my-auto font-bold text-4xl ">MeMoApp</a>
         </Link>
-        <div className="flex ">
+        <div className="hidden  sm:flex  ">
           <Link href="/notes">
             <a className="block my-auto border font-bold px-6 py-2  rounded-xl mr-16   hover:text-blue-500 ">
               新規作成
             </a>
           </Link>
-          <h2 className="block my-auto">user-icon</h2>
-          <button type={"button"} onClick={handleClick}>
+          <button
+            className="block my-auto border font-bold px-6 py-2  rounded-xl mr-16   hover:text-blue-500 "
+            type={"button"}
+            onClick={handleClick}
+          >
             ログアウト
           </button>
-          <button type={"button"} onClick={handleClickCheck}>
+          {/* <button type={"button"} onClick={handleClickCheck}>
             チェック
-          </button>
+          </button> */}
         </div>
       </header>
     </div>
