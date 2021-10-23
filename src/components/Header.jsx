@@ -22,11 +22,6 @@ export default function Header() {
     }
   };
 
-  // const handleClickCheck = async () => {
-  //   const user = await auth.currentUser.uid;
-  //   console.log(user);
-  // };
-
   return (
     <div>
       <header className="flex justify-between h-20 px-8 ">
@@ -46,9 +41,6 @@ export default function Header() {
           >
             ログアウト
           </button>
-          {/* <button type={"button"} onClick={handleClickCheck}>
-            チェック
-          </button> */}
         </div>
       </header>
     </div>

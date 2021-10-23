@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { auth } from "../firebase/firebase";
+import { useDateChange } from "../hooks/useDateChange";
 
 export const memosQuery = async () => {
   const userId = await auth.currentUser.uid;
@@ -29,7 +30,7 @@ export const memoMaps = async (resArray) => {
   const memoArray = await resArray.map((doc) => ({
     id: doc.id,
     body: doc.data().body,
-    datetime: doc.data().datetime,
+    datetime: useDateChange(doc.data().datetime.toDate()),
   }));
   return memoArray;
 };
