@@ -40,7 +40,7 @@ const Form = () => {
   }, [memoId]);
 
   return (
-    <div className="h-full w-2/3 border rounded-xl m-2.5">
+    <div className="h-full w-[370px] border rounded-xl mx-auto sm:w-2/3 sm:m-2.5">
       {router.pathname === "/notes" ? (
         <div className="text-center">
           <button
