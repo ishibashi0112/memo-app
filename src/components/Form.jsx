@@ -40,7 +40,7 @@ const Form = () => {
   }, [memoId]);
 
   return (
-    <div className="h-full w-[370px] border rounded-xl mx-auto sm:w-2/3 sm:m-2.5">
+    <div className="h-full w-[370px]  rounded-xl mx-auto sm:border sm:w-2/3 sm:m-2.5">
       {router.pathname === "/notes" ? (
         <div className="text-center">
           <button
@@ -77,7 +77,7 @@ const Form = () => {
         type="text"
         value={text}
         onChange={handleChange}
-        className="block w-3/4 h-4/5 border-2 rounded-xl mx-auto"
+        className="block w-full h-4/5  border-2 rounded-xl mx-auto sm:w-3/4 sm:h-4/5"
       />
     </div>
   );

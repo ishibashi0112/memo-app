@@ -5,7 +5,10 @@ import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 
-export default function Header() {
+import { FaBars } from "react-icons/fa";
+import { MenuList } from "../components/MenuList";
+
+const Header = () => {
   const router = useRouter();
   const handleClick = async () => {
     try {
@@ -24,10 +27,17 @@ export default function Header() {
 
   return (
     <div>
-      <header className="flex justify-between h-20 px-8 ">
+      <header className="flex justify-between w-screen h-20 px-2 lg:px-8 ">
         <Link href="/">
-          <a className="block my-auto font-bold text-4xl ">MeMoApp</a>
+          <a className="block my-auto font-bold text-[26px] sm:text-[4vw] lg:text-[41px] ">
+            MeMoApp
+          </a>
         </Link>
+        <div className="block my-auto sm:hidden">
+          <FaBars />
+          <MenuList />
+        </div>
+
         <div className="hidden  sm:flex  ">
           <Link href="/notes">
             <a className="block my-auto border font-bold px-6 py-2  rounded-xl mr-16   hover:text-blue-500 ">
@@ -45,4 +55,6 @@ export default function Header() {
       </header>
     </div>
   );
-}
+};
+
+export default Header;
