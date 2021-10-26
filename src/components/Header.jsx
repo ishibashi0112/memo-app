@@ -1,28 +1,13 @@
 import React from "react";
 import Link from "next/link";
-
-import { auth } from "../firebase/firebase";
-import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
-
-import { FaBars } from "react-icons/fa";
-import { MenuList } from "../components/MenuList";
+import MenuLists from "../components/MenuLists";
+import { signOutAuth } from "../firebase/auth";
 
 const Header = () => {
   const router = useRouter();
   const handleClick = async () => {
-    try {
-      const user1 = await auth.currentUser;
-      console.log(user1);
-      await signOut(auth);
-      const user2 = await auth.currentUser;
-      console.log(user2);
-      router.replace("/auth/signIn");
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-    }
+    signOutAuth(router);
   };
 
   return (
@@ -34,10 +19,8 @@ const Header = () => {
           </a>
         </Link>
         <div className="block my-auto sm:hidden">
-          <FaBars />
-          <MenuList />
+          <MenuLists />
         </div>
-
         <div className="hidden  sm:flex  ">
           <Link href="/notes">
             <a className="block my-auto border font-bold px-6 py-2  rounded-xl mr-16   hover:text-blue-500 ">
