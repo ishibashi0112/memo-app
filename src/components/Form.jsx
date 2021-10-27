@@ -6,6 +6,10 @@ import {
   newMemo,
   updateMemo,
 } from "../firebase/firestore";
+import { GrUpdate } from "react-icons/gr";
+import { MdDelete } from "react-icons/md";
+import { MdOutlineSaveAlt } from "react-icons/md";
+import toast, { Toaster } from "react-hot-toast";
 
 const Form = () => {
   const [text, setText] = useState("");
@@ -17,8 +21,9 @@ const Form = () => {
   }, []);
 
   const handleSubmit = async () => {
-    const newMemoId = await newMemo(text);
-    router.replace(`/list/${newMemoId}`);
+    // const newMemoId = await newMemo(text);
+    // router.replace(`/list/${newMemoId}`);
+    toast("保存しました");
   };
 
   const handleClickUpdate = async () => {
@@ -49,18 +54,28 @@ const Form = () => {
             }
             onClick={handleSubmit}
           >
-            保存
+            <div className="flex">
+              <h1 className="my-auto mr-1">
+                <MdOutlineSaveAlt />
+              </h1>
+              <p>Save</p>
+            </div>
           </button>
         </div>
       ) : (
-        <div className="text-center">
+        <div className="mx-auto flex">
           <button
             className={
               "border font-bold px-6 py-2 rounded-xl mx-8  my-6 hover:text-blue-500 "
             }
             onClick={handleClickUpdate}
           >
-            更新
+            <div className="flex">
+              <h1 className="my-auto mr-1">
+                <GrUpdate />
+              </h1>
+              <p>Update</p>
+            </div>
           </button>
           <button
             className={
@@ -68,7 +83,12 @@ const Form = () => {
             }
             onClick={handleClickDelete}
           >
-            削除
+            <div className="flex">
+              <h1 className="my-auto mr-1">
+                <MdDelete />
+              </h1>
+              <p>Delete</p>
+            </div>
           </button>
         </div>
       )}

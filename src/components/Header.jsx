@@ -3,7 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import MenuLists from "../components/MenuLists";
 import { signOutAuth } from "../firebase/auth";
-
+import { BsPencilSquare } from "react-icons/bs";
+import { BiLogOut } from "react-icons/bi";
 const Header = () => {
   const router = useRouter();
   const handleClick = async () => {
@@ -23,16 +24,26 @@ const Header = () => {
         </div>
         <div className="hidden  sm:flex  ">
           <Link href="/notes">
-            <a className="block my-auto border font-bold px-6 py-2  rounded-xl mr-16   hover:text-blue-500 ">
-              新規作成
+            <a className="block  my-auto border font-bold px-6 py-2  rounded-xl mr-16   hover:text-blue-500 ">
+              <div className="flex">
+                <h1 className="my-auto mr-1">
+                  <BsPencilSquare />
+                </h1>
+                <p>New</p>
+              </div>
             </a>
           </Link>
           <button
-            className="block my-auto border font-bold px-6 py-2  rounded-xl mr-16   hover:text-blue-500 "
+            className="block flex my-auto border font-bold px-6 py-2  rounded-xl mr-16   hover:text-blue-500 "
             type={"button"}
             onClick={handleClick}
           >
-            ログアウト
+            <div className="flex">
+              <h1 className="my-auto mr-1">
+                <BiLogOut />
+              </h1>
+              <p>Logout</p>
+            </div>
           </button>
         </div>
       </header>

@@ -26,11 +26,12 @@ const MenuLists = () => {
       <Button
         id="basic-button"
         aria-controls="basic-menu"
-        aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <FaBars />
+        <h1 className="text-black text-xl">
+          <FaBars />
+        </h1>
       </Button>
       <Menu
         id="basic-menu"
@@ -43,10 +44,9 @@ const MenuLists = () => {
       >
         <MenuItem>
           <Link href="/notes">
-            <a className="text-black no-underline">New</a>
+            <a className="no-underline text-black ">New</a>
           </Link>
         </MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClickSignOut}>Logout</MenuItem>
       </Menu>
     </div>

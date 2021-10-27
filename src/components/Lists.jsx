@@ -5,10 +5,9 @@ import ListMaps from "./ListMaps";
 import { getAllMemos, memoMaps, memosQuery } from "../firebase/firestore";
 import { onSnapshot } from "firebase/firestore";
 
-export default function Lists() {
+const Lists = () => {
   const [memos, setMemos] = useState([]);
   const router = useRouter();
-  console.log(router.pathname);
 
   const GetMemos = async () => {
     const memosArray = await getAllMemos();
@@ -50,4 +49,6 @@ export default function Lists() {
       <ListMaps memos={memos} />
     </div>
   );
-}
+};
+
+export default Lists;
