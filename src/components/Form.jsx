@@ -21,9 +21,9 @@ const Form = () => {
   }, []);
 
   const handleSubmit = async () => {
-    // const newMemoId = await newMemo(text);
-    // router.replace(`/list/${newMemoId}`);
-    toast("保存しました");
+    await newMemo(text, router);
+    // router.replace("/");
+    toast.success("保存しました");
   };
 
   const handleClickUpdate = async () => {
@@ -32,6 +32,7 @@ const Form = () => {
 
   const handleClickDelete = async () => {
     deleteMemo(memoId);
+    toast.success("削除しました");
     router.replace("/");
   };
 
@@ -61,6 +62,7 @@ const Form = () => {
               <p>Save</p>
             </div>
           </button>
+          <Toaster />
         </div>
       ) : (
         <div className="mx-auto flex">
@@ -99,6 +101,7 @@ const Form = () => {
         onChange={handleChange}
         className="block w-full h-4/5  border-2 rounded-xl mx-auto sm:w-3/4 sm:h-4/5"
       />
+      <Toaster />
     </div>
   );
 };

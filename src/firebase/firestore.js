@@ -11,6 +11,7 @@ import {
   setDoc,
   getDoc,
 } from "firebase/firestore";
+
 import { db } from "../firebase/firebase";
 import { auth } from "../firebase/firebase";
 import { useDateChange } from "../hooks/useDateChange";
@@ -48,7 +49,7 @@ export const getAllMemos = async () => {
   }
 };
 
-export const newMemo = async (text) => {
+export const newMemo = async (text, router) => {
   const datetime = Timestamp.fromDate(new Date());
   const memoData = await addDoc(collection(db, "memos"), {
     body: text,
@@ -56,7 +57,7 @@ export const newMemo = async (text) => {
     uid: auth.currentUser.uid,
   });
   const newMemoId = memoData.id;
-  return newMemoId;
+  router.replace(`/list/${newMemoId}`);
 };
 
 export const deleteMemo = async (memoId) => {
