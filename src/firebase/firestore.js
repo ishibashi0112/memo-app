@@ -60,9 +60,9 @@ export const newMemo = async (text, router) => {
   router.replace(`/list/${newMemoId}`);
 };
 
-export const deleteMemo = async (memoId) => {
+export const deleteMemo = async (memoId, router) => {
   await deleteDoc(doc(db, "memos", memoId));
-  console.log("削除しました");
+  router.replace("/");
 };
 
 export const updateMemo = async (text, memoId) => {

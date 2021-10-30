@@ -22,9 +22,9 @@ const Header = () => {
         <div className="block my-auto sm:hidden">
           <MenuLists />
         </div>
-        <div className="hidden  sm:flex  ">
+        <div className="hidden  sm:flex ">
           <Link href="/notes">
-            <a className="block  my-auto border font-bold px-6 py-2  rounded-xl mr-16   hover:text-blue-500 ">
+            <a className="block  my-auto border font-bold px-6 py-2 mr-2  rounded-xl    hover:text-blue-500 ">
               <div className="flex">
                 <h1 className="my-auto mr-1">
                   <BsPencilSquare />
@@ -34,7 +34,7 @@ const Header = () => {
             </a>
           </Link>
           <button
-            className="block flex my-auto border font-bold px-6 py-2  rounded-xl mr-16   hover:text-blue-500 "
+            className="block my-auto border font-bold px-6 py-2  rounded-xl    hover:text-blue-500 "
             type={"button"}
             onClick={handleClick}
           >

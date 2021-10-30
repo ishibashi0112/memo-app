@@ -22,18 +22,17 @@ const Form = () => {
 
   const handleSubmit = async () => {
     await newMemo(text, router);
-    // router.replace("/");
     toast.success("保存しました");
   };
 
   const handleClickUpdate = async () => {
     updateMemo(text, memoId);
+    toast.success("更新しました");
   };
 
   const handleClickDelete = async () => {
-    deleteMemo(memoId);
+    deleteMemo(memoId, router);
     toast.success("削除しました");
-    router.replace("/");
   };
 
   const memoLoading = async () => {
@@ -65,7 +64,7 @@ const Form = () => {
           <Toaster />
         </div>
       ) : (
-        <div className="mx-auto flex">
+        <div className="flex justify-center">
           <button
             className={
               "border font-bold px-6 py-2 rounded-xl mx-8  my-6 hover:text-blue-500 "
