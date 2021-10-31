@@ -49,7 +49,7 @@ export const getAllMemos = async () => {
   }
 };
 
-export const newMemo = async (text, router) => {
+export const newMemo = async (text) => {
   const datetime = Timestamp.fromDate(new Date());
   const memoData = await addDoc(collection(db, "memos"), {
     body: text,
@@ -57,12 +57,11 @@ export const newMemo = async (text, router) => {
     uid: auth.currentUser.uid,
   });
   const newMemoId = memoData.id;
-  router.replace(`/list/${newMemoId}`);
+  return newMemoId;
 };
 
-export const deleteMemo = async (memoId, router) => {
+export const deleteMemo = async (memoId) => {
   await deleteDoc(doc(db, "memos", memoId));
-  router.replace("/");
 };
 
 export const updateMemo = async (text, memoId) => {

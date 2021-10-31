@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MenuLists from "../components/MenuLists";
 import { signOutAuth } from "../firebase/auth";
 import { BsPencilSquare } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
+
 const Header = () => {
   const router = useRouter();
-  const handleClick = async () => {
+  const handleClick = useCallback(async () => {
     signOutAuth(router);
-  };
+  }, []);
 
   return (
     <div>

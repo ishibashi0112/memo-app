@@ -1,20 +1,16 @@
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
+import { Toaster } from "react-hot-toast";
 import "tailwindcss/tailwind.css";
-import { auth } from "../firebase/firebase";
+import { useAuthCurrentCheck } from "../hooks/useAuthCurrentCheck";
 
-function MyApp({ Component, pageProps }) {
-  const router = useRouter();
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (!user) {
-        router.replace("/auth/signIn");
-      }
-    });
-  }, []);
-
-  return <Component {...pageProps} />;
-}
+const MyApp = ({ Component, pageProps }) => {
+  useAuthCurrentCheck();
+  return (
+    <div>
+      <Toaster />
+      <Component {...pageProps} />
+    </div>
+  );
+};
 
 export default MyApp;

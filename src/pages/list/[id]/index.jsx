@@ -8,7 +8,7 @@ const list = () => {
   return (
     <div>
       <Head>
-        <title>a</title>
+        <title>memo-app</title>
       </Head>
       <div className="h-screen w-full flex flex-col">
         <Header />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import ListMaps from "./ListMaps";
 
@@ -9,12 +9,12 @@ const Lists = () => {
   const [memos, setMemos] = useState([]);
   const router = useRouter();
 
-  const GetMemos = async () => {
+  const GetMemos = useCallback(async () => {
     const memosArray = await getAllMemos();
     setMemos(memosArray);
-  };
+  }, []);
 
-  const snapShot = async () => {
+  const snapShot = useCallback(async () => {
     try {
       const res = await memosQuery();
       onSnapshot(res, async (querySnapshot) => {
@@ -27,7 +27,7 @@ const Lists = () => {
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
     }
-  };
+  }, []);
 
   useEffect(() => {
     GetMemos();
@@ -36,7 +36,7 @@ const Lists = () => {
 
   if (router.pathname === "/") {
     return (
-      <div className="h-full w-[370px] border rounded-xl mx-auto sm:w-1/3 sm:mt-2.5">
+      <div className="h-full w-[370px] border rounded-xl mx-auto sm:w-1/3 sm:mt-2.5 sm:m-2">
         <h1 className="h-6 block  border-b text-center rounded-t-xl bg-gray-200">{`メモ一覧 ${memos?.length}件`}</h1>
         <ListMaps memos={memos} />
       </div>
@@ -44,7 +44,7 @@ const Lists = () => {
   }
 
   return (
-    <div className="h-full w-[370px] border rounded-xl mx-auto hidden sm:block sm:w-1/3 sm:mt-2.5">
+    <div className="hidden h-full w-[370px] border rounded-xl mx-auto  sm:block sm:w-1/3 sm:mt-2.5 sm:m-2">
       <h1 className="h-6 block  border-b text-center rounded-t-xl bg-gray-200">{`メモ一覧 ${memos?.length}件`}</h1>
       <ListMaps memos={memos} />
     </div>

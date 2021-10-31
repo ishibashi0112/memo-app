@@ -10,19 +10,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-import { singUpAuth } from "../../firebase/auth";
+import { useAuthSignUp } from "../../hooks/useAuthSignUp";
 
 const theme = createTheme();
 
-export default function SignUp() {
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = data.get("email");
-    const password = data.get("password");
-    singUpAuth(email, password);
-  };
+const SignUp = () => {
+  const { handleSubmit } = useAuthSignUp();
 
   return (
     <ThemeProvider theme={theme}>
@@ -91,4 +84,6 @@ export default function SignUp() {
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default SignUp;
