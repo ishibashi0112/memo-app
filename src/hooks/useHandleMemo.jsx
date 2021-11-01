@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 
 export const useHandleMemo = () => {
   const [text, setText] = useState("");
+  const [loadong, setloading] = useState(false);
   const router = useRouter();
   const memoId = router.query.id;
 
@@ -17,10 +18,25 @@ export const useHandleMemo = () => {
     setText(e.target.value);
   }, []);
 
+  // const handleSubmit = useCallback(async () => {
+  //   setloading(true);
+  //   const newMemoId = await newMemo(text);
+  //   router.push(`/list/${newMemoId}`);
+  //   toast.success("保存しました");
+  //   setloading(false);
+  // }, [text]);
+
   const handleSubmit = useCallback(async () => {
-    const newMemoId = await newMemo(text);
-    router.push(`/list/${newMemoId}`);
-    toast.success("保存しました");
+    setloading(true);
+    await toast.promise(newMemo(text), {
+      loading: "Loading",
+      success: "Got the data",
+      error: "Error when fetching",
+    });
+
+    router.push(`/`);
+    // toast.success("保存しました");
+    setloading(false);
   }, [text]);
 
   const handleClickUpdate = useCallback(async () => {
@@ -29,9 +45,11 @@ export const useHandleMemo = () => {
   }, [text]);
 
   const handleClickDelete = useCallback(async () => {
+    setloading(true);
     deleteMemo(memoId);
     router.push("/");
     toast.success("削除しました");
+    setloading(false);
   }, [memoId]);
 
   const memoLoading = async () => {
@@ -46,6 +64,7 @@ export const useHandleMemo = () => {
   return {
     text,
     router,
+    loadong,
     handleChange,
     handleSubmit,
     handleClickUpdate,

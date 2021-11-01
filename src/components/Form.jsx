@@ -10,6 +10,7 @@ const Form = () => {
   const {
     text,
     router,
+    loadong,
     handleChange,
     handleSubmit,
     handleClickUpdate,
@@ -25,6 +26,7 @@ const Form = () => {
               "border font-bold px-6 py-2 rounded-xl mx-8  my-6 hover:text-blue-500 "
             }
             onClick={handleSubmit}
+            disabled={loadong}
           >
             <div className="flex">
               <h1 className="my-auto mr-1">
@@ -66,6 +68,7 @@ const Form = () => {
             "border font-bold px-6 py-2 rounded-xl mx-8 my-6 hover:text-blue-500 "
           }
           onClick={handleClickDelete}
+          disabled={loadong}
         >
           <div className="flex">
             <h1 className="my-auto mr-1">

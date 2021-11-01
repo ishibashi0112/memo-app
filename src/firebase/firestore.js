@@ -11,7 +11,6 @@ import {
   setDoc,
   getDoc,
 } from "firebase/firestore";
-
 import { db } from "../firebase/firebase";
 import { auth } from "../firebase/firebase";
 import { useDateChange } from "../hooks/useDateChange";
