@@ -8,6 +8,15 @@ import {
 } from "../firebase/firestore";
 import toast from "react-hot-toast";
 
+const PromiseToast = async (promise, success) => {
+  const data = await toast.promise(promise, {
+    loading: "Loading",
+    success: success,
+    error: "正常に終了しませんでした。",
+  });
+  return data;
+};
+
 export const useHandleMemo = () => {
   const [text, setText] = useState("");
   const [loadong, setloading] = useState(false);
@@ -18,37 +27,21 @@ export const useHandleMemo = () => {
     setText(e.target.value);
   }, []);
 
-  // const handleSubmit = useCallback(async () => {
-  //   setloading(true);
-  //   const newMemoId = await newMemo(text);
-  //   router.push(`/list/${newMemoId}`);
-  //   toast.success("保存しました");
-  //   setloading(false);
-  // }, [text]);
-
   const handleSubmit = useCallback(async () => {
     setloading(true);
-    await toast.promise(newMemo(text), {
-      loading: "Loading",
-      success: "Got the data",
-      error: "Error when fetching",
-    });
-
-    router.push(`/`);
-    // toast.success("保存しました");
+    const newMemoId = await PromiseToast(newMemo(text), "保存しました");
+    router.push(`/list/${newMemoId}`);
     setloading(false);
   }, [text]);
 
   const handleClickUpdate = useCallback(async () => {
-    updateMemo(text, memoId);
-    toast.success("更新しました");
+    await PromiseToast(updateMemo(text, memoId), "更新しました");
   }, [text]);
 
   const handleClickDelete = useCallback(async () => {
     setloading(true);
-    deleteMemo(memoId);
+    await PromiseToast(deleteMemo(memoId), "削除しました");
     router.push("/");
-    toast.success("削除しました");
     setloading(false);
   }, [memoId]);
 
