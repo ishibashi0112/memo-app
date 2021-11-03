@@ -28,6 +28,10 @@ export const useHandleMemo = () => {
   }, []);
 
   const handleSubmit = useCallback(async () => {
+    if (!text || !text.match(/\S/g)) {
+      toast.error("未入力です", { duration: 700 });
+      return;
+    }
     setloading(true);
     const newMemoId = await PromiseToast(newMemo(text), "保存しました");
     router.push(`/list/${newMemoId}`);
@@ -35,6 +39,11 @@ export const useHandleMemo = () => {
   }, [text]);
 
   const handleClickUpdate = useCallback(async () => {
+    if (!text || !text.match(/\S/g)) {
+      await PromiseToast(deleteMemo(memoId), "削除しました");
+      router.push("/");
+      return;
+    }
     await PromiseToast(updateMemo(text, memoId), "更新しました");
   }, [text]);
 

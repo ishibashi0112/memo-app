@@ -2,7 +2,7 @@ import React from "react";
 import { useHandleMemo } from "../hooks/useHandleMemo";
 
 //react icons imports
-import { GrUpdate } from "react-icons/gr";
+import { MdOutlineUpdate } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { MdOutlineSaveAlt } from "react-icons/md";
 
@@ -58,7 +58,7 @@ const Form = () => {
         >
           <div className="flex">
             <h1 className="my-auto mr-1">
-              <GrUpdate />
+              <MdOutlineUpdate />
             </h1>
             <p>Update</p>
           </div>

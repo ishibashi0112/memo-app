@@ -8,7 +8,7 @@ const Lists = () => {
   if (router.pathname === "/") {
     return (
       <div className="h-full w-[370px] border rounded-xl mx-auto sm:w-1/3 sm:mt-2.5 sm:m-2">
-        <div>
+        <div className="h-full">
           <h1 className="h-6 block  border-b text-center rounded-t-xl bg-gray-200">{`メモ一覧 ${
             memos ? memos.length : 0
           }件`}</h1>
@@ -20,8 +20,12 @@ const Lists = () => {
 
   return (
     <div className="hidden h-full w-[370px] border rounded-xl mx-auto  sm:block sm:w-1/3 sm:mt-2.5 sm:m-2">
-      <h1 className="h-6 block  border-b text-center rounded-t-xl bg-gray-200">{`メモ一覧 ${memos?.length}件`}</h1>
-      <ListMaps memos={memos} />
+      <div className="h-full">
+        <h1 className="h-6 block  border-b text-center rounded-t-xl bg-gray-200">{`メモ一覧 ${
+          memos ? memos.length : 0
+        }件`}</h1>
+        <ListMaps memos={memos} />
+      </div>
     </div>
   );
 };
