@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getAllMemos, memoMaps, memosQuery } from "../firebase/firestore";
 import { onSnapshot } from "firebase/firestore";
+import { onAuthStateChanged } from "@firebase/auth";
+import { auth } from "../firebase/firebase";
 
 export const useMemoLists = () => {
   const [memos, setMemos] = useState([]);
@@ -13,18 +15,22 @@ export const useMemoLists = () => {
   }, []);
 
   const snapShot = useCallback(async () => {
-    try {
-      const res = await memosQuery();
-      onSnapshot(res, async (querySnapshot) => {
-        const resArray = querySnapshot.docs;
-        const AllMemos = await memoMaps(resArray);
-        setMemos(AllMemos);
-      });
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-    }
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          const res = await memosQuery();
+          onSnapshot(res, async (querySnapshot) => {
+            const resArray = querySnapshot.docs;
+            const AllMemos = await memoMaps(resArray);
+            setMemos(AllMemos);
+          });
+        } catch (error) {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+        }
+      }
+    });
   }, []);
 
   useEffect(() => {

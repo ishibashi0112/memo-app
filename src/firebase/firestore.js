@@ -1,3 +1,4 @@
+import { onAuthStateChanged } from "@firebase/auth";
 import {
   collection,
   getDocs,
@@ -36,16 +37,20 @@ export const memoMaps = async (resArray) => {
 };
 
 export const getAllMemos = async () => {
-  try {
-    const res = await getDocs(await memosQuery());
-    const resArray = res.docs;
-    const AllMemos = memoMaps(resArray);
-    return AllMemos;
-  } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode, errorMessage);
-  }
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        const res = await getDocs(await memosQuery());
+        const resArray = res.docs;
+        const AllMemos = memoMaps(resArray);
+        return AllMemos;
+      } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      }
+    }
+  });
 };
 
 export const newMemo = async (text) => {
