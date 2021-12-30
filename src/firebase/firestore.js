@@ -12,8 +12,8 @@ import {
   setDoc,
   getDoc,
 } from "firebase/firestore";
-import { db } from "../firebase/firebase";
-import { auth } from "../firebase/firebase";
+import { db } from "./firebaseConfig";
+import { auth } from "./firebaseConfig";
 import { useDateChange } from "../hooks/useDateChange";
 
 export const memosQuery = async () => {

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { auth } from "../firebase/firebase";
+import { auth } from "../firebase/firebaseConfig";
 
 export const useAuthCurrentCheck = () => {
   const router = useRouter();

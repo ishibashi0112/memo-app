@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { getAllMemos, memoMaps, memosQuery } from "../firebase/firestore";
 import { onSnapshot } from "firebase/firestore";
 import { onAuthStateChanged } from "@firebase/auth";
-import { auth } from "../firebase/firebase";
+import { auth } from "../firebase/firebaseConfig";
 
 export const useMemoLists = () => {
   const [memos, setMemos] = useState([]);
