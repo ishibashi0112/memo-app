@@ -1,4 +1,4 @@
-import { singUpAuth } from "../../firebase/auth";
+import { singUpAuth } from "../firebase/firebaseAuth";
 
 export const useAuthSignUp = () => {
   const handleSubmit = async (event) => {

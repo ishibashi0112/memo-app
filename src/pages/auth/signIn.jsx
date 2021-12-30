@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 //firebase Auth import
-import { signInAuth } from "../../firebase/auth";
+import { signInAuth } from "../../firebase/firebaseAuth";
 
 const theme = createTheme();
 
