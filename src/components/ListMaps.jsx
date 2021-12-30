@@ -8,9 +8,11 @@ const ListMaps = (props) => {
         return (
           <li key={memo.id} className="w-full  border-b truncate">
             <Link href={`/list/${memo.id}`}>
-              <a className="hover:text-blue-500">
-                <h2 className="text-lg">{memo.body.trim()}</h2>
-                <h2 className="text-base text-gray-500">{memo.datetime}</h2>
+              <a>
+                <div className="hover:text-blue-500 hover:bg-gray-100 active:opacity-70 transition">
+                  <h2 className="text-lg ">{memo.body.trim()}</h2>
+                  <h2 className="text-base text-gray-500">{memo.datetime}</h2>
+                </div>
               </a>
             </Link>
           </li>
