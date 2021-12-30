@@ -4,7 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { FaBars } from "react-icons/fa";
 import { Link } from "@mui/material";
-import { signOutAuth } from "../firebase/auth";
+import { signOutAuth } from "../firebase/firebaseAuth";
 import { useRouter } from "next/router";
 
 const MenuLists = () => {

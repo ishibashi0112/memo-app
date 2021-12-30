@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MenuLists from "../components/MenuLists";
-import { signOutAuth } from "../firebase/auth";
+import { signOutAuth } from "../firebase/firebaseAuth";
 import { BsPencilSquare } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 
