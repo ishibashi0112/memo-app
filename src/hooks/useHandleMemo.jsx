@@ -8,6 +8,9 @@ import {
 } from "../firebase/firestore";
 import toast from "react-hot-toast";
 
+import { storage } from "../firebase/firebaseConfig";
+import { ref, uploadBytes } from "firebase/storage";
+
 const PromiseToast = async (promise, success) => {
   const data = await toast.promise(promise, {
     loading: "Loading",
@@ -17,14 +20,36 @@ const PromiseToast = async (promise, success) => {
   return data;
 };
 
-export const useHandleMemo = () => {
+export const useHandleMemo = (inputFileRef) => {
   const [text, setText] = useState("");
   const [loadong, setloading] = useState(false);
+  const [file, setFile] = useState(null);
+  const [img, setImg] = useState(null);
   const router = useRouter();
   const memoId = router.query.id;
 
   const handleChange = useCallback((e) => {
     setText(e.target.value);
+  }, []);
+
+  const handleSelectFile = useCallback(() => {
+    const fileList = inputFileRef.current.files;
+    const fileOb = fileList[0];
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const imgUrl = e.target.result;
+      setImg(imgUrl);
+    };
+
+    if (fileOb) {
+      reader.readAsDataURL(fileOb);
+      setFile(fileOb.name);
+    }
+  }, [file, img]);
+
+  const handleDeleteFile = useCallback(() => {
+    setFile(null);
+    setImg(null);
   }, []);
 
   const handleSubmit = useCallback(async () => {
@@ -33,6 +58,12 @@ export const useHandleMemo = () => {
       return;
     }
     setloading(true);
+
+    if (file) {
+      const storageRef = ref(storage, "er.png");
+      uploadBytes(storageRef, file);
+    }
+
     const newMemoId = await PromiseToast(newMemo(text), "保存しました");
     router.push(`/list/${newMemoId}`);
     setloading(false);
@@ -65,9 +96,13 @@ export const useHandleMemo = () => {
 
   return {
     text,
+    file,
+    img,
     router,
     loadong,
     handleChange,
+    handleSelectFile,
+    handleDeleteFile,
     handleSubmit,
     handleClickUpdate,
     handleClickDelete,
