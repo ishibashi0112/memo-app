@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useHandleMemo } from "../hooks/useHandleMemo";
-import { useTextAreaFocus } from "../hooks/useTextareaFocus";
+import { useTextAreaFocus } from "../hooks/useTextAreaFocus";
 
 //react icons imports
 import { MdOutlineUpdate } from "react-icons/md";
