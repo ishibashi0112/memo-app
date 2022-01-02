@@ -60,7 +60,7 @@ const Form = () => {
               ×
             </button>
             <img src={img ? img : ""} alt="r" className="inline mx-1 h-6 w-6" />
-            <p className={"inline"}>{file}</p>
+            <p className={"inline"}>{file?.name}</p>
           </div>
         </div>
 

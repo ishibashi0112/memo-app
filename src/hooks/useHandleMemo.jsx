@@ -8,9 +8,6 @@ import {
 } from "../firebase/firestore";
 import toast from "react-hot-toast";
 
-import { storage } from "../firebase/firebaseConfig";
-import { ref, uploadBytes } from "firebase/storage";
-
 const PromiseToast = async (promise, success) => {
   const data = await toast.promise(promise, {
     loading: "Loading",
@@ -43,7 +40,7 @@ export const useHandleMemo = (inputFileRef) => {
 
     if (fileOb) {
       reader.readAsDataURL(fileOb);
-      setFile(fileOb.name);
+      setFile(fileOb);
     }
   }, [file, img]);
 
@@ -58,13 +55,7 @@ export const useHandleMemo = (inputFileRef) => {
       return;
     }
     setloading(true);
-
-    if (file) {
-      const storageRef = ref(storage, "er.png");
-      uploadBytes(storageRef, file);
-    }
-
-    const newMemoId = await PromiseToast(newMemo(text), "保存しました");
+    const newMemoId = await PromiseToast(newMemo(text, file), "保存しました");
     router.push(`/list/${newMemoId}`);
     setloading(false);
   }, [text]);

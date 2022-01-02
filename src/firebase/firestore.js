@@ -13,8 +13,9 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { db } from "./firebaseConfig";
-import { auth } from "./firebaseConfig";
+import { auth, storage } from "./firebaseConfig";
 import { useDateChange } from "../hooks/useDateChange";
+import { ref, uploadBytes } from "firebase/storage";
 
 export const memosQuery = async () => {
   const userId = await auth.currentUser.uid;
@@ -53,7 +54,7 @@ export const getAllMemos = async () => {
   });
 };
 
-export const newMemo = async (text) => {
+export const newMemo = async (text, file) => {
   const datetime = Timestamp.fromDate(new Date());
   const memoData = await addDoc(collection(db, "memos"), {
     body: text,
@@ -61,6 +62,12 @@ export const newMemo = async (text) => {
     uid: auth.currentUser.uid,
   });
   const newMemoId = memoData.id;
+
+  if (file) {
+    const storageRef = ref(storage, newMemoId);
+    uploadBytes(storageRef, file);
+  }
+
   return newMemoId;
 };
 
