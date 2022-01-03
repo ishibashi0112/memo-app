@@ -10,8 +10,13 @@ const ListMaps = (props) => {
             <Link href={`/list/${memo.id}`}>
               <a>
                 <div className="hover:text-blue-500 hover:bg-gray-100 active:opacity-70 transition">
-                  <h2 className="text-lg ">{memo.body.trim()}</h2>
-                  <h2 className="text-base text-gray-500">{memo.datetime}</h2>
+                  <p className="text-lg ">{memo.body.trim()}</p>
+                  <ul className="flex">
+                    <li className="text-base text-gray-500">{memo.datetime}</li>
+                    {/* <li className="text-base text-gray-500">
+                      {fileSearch(memo.id) ? "添付あり" : ""}
+                    </li> */}
+                  </ul>
                 </div>
               </a>
             </Link>

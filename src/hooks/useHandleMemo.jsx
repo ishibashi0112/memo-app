@@ -45,6 +45,7 @@ export const useHandleMemo = (inputFileRef) => {
   }, [file, img]);
 
   const handleDeleteFile = useCallback(() => {
+    inputFileRef.current.value = "";
     setFile(null);
     setImg(null);
   }, []);

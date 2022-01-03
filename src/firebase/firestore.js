@@ -9,13 +9,14 @@ import {
   Timestamp,
   deleteDoc,
   doc,
-  setDoc,
   getDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "./firebaseConfig";
-import { auth, storage } from "./firebaseConfig";
+import { auth } from "./firebaseConfig";
 import { useDateChange } from "../hooks/useDateChange";
-import { ref, uploadBytes } from "firebase/storage";
+import { fileUpload, getFileData } from "./firebaseStorage";
+import { randomStr } from "../hooks/useRandomStr";
 
 export const memosQuery = async () => {
   const userId = await auth.currentUser.uid;
@@ -56,19 +57,23 @@ export const getAllMemos = async () => {
 
 export const newMemo = async (text, file) => {
   const datetime = Timestamp.fromDate(new Date());
+  let fileUrl;
+  if (file) {
+    const fileId = randomStr(10);
+    await fileUpload(file, fileId);
+    fileUrl = await getFileData(fileId);
+  }
+
   const memoData = await addDoc(collection(db, "memos"), {
     body: text,
     datetime,
     uid: auth.currentUser.uid,
+    file: file ? fileUrl : "",
   });
-  const newMemoId = memoData.id;
 
-  if (file) {
-    const storageRef = ref(storage, newMemoId);
-    uploadBytes(storageRef, file);
-  }
+  const MemoId = memoData.id;
 
-  return newMemoId;
+  return MemoId;
 };
 
 export const deleteMemo = async (memoId) => {
@@ -79,10 +84,9 @@ export const updateMemo = async (text, memoId) => {
   console.log(text, memoId);
   const datetime = Timestamp.fromDate(new Date());
   const memoRef = doc(db, "memos", memoId);
-  await setDoc(memoRef, {
+  await updateDoc(memoRef, {
     body: text,
     datetime,
-    uid: auth.currentUser.uid,
   });
 };
 
